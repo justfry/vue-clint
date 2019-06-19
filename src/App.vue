@@ -1,17 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <Users v-bind:users="users" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Users from './components/usersBasicInfo'
+import SearchUser from './components/SearchUser.vue'
+import axios from 'axios'
+import { METHODS } from 'http';
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Users,
+    SearchUser
+  },
+  data(){
+   
+  },
+  mounted(){
+    
+  },
+  methonds:{
+  
   }
 }
 </script>
