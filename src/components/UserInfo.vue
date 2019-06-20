@@ -1,6 +1,11 @@
 <template>
     <div>
-        <p>{{user.name}}</p>
+        <p>
+            {{user.id}} 
+            {{user.first_name}}
+            {{user.last_name}}
+            {{user.bio}}
+            </p>
     </div>
 </template>
 

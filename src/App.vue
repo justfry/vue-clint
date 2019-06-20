@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <Users v-bind:users="users" />
+      <Users />
   </div>
 </template>
 
@@ -14,9 +14,6 @@ export default {
   components: {
     Users,
     SearchUser
-  },
-  data(){
-   
   },
   mounted(){
     
