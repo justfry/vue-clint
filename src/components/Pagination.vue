@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div :key=page v-for="page in pages">
-           <button v-on:click="changePage(page)">{{page}}</button>
+        <div :key=page v-for="page in pages" class="button-group">
+           <button v-on:click="changePage(page)" class="pagination-button">{{page}}</button>
         </div>
     </div>
 </template>
@@ -25,5 +25,11 @@ export default {
 </script>
 
 <style>
-
+.pagination-button{
+    float: left;
+}
+.button-group{
+    width: 300px;
+    margin: 0 auto;
+}
 </style>

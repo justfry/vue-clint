@@ -10,6 +10,9 @@
 import { mapActions } from 'vuex'
 export default {
     name: "SearchUser",
+    components: {
+
+    },
     data() {
         return {
             search: ''

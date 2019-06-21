@@ -8,18 +8,10 @@
 import Users from './components/usersBasicInfo'
 import SearchUser from './components/SearchUser.vue'
 import axios from 'axios'
-import { METHODS } from 'http';
 export default {
   name: 'app',
   components: {
     Users,
-    SearchUser
-  },
-  mounted(){
-    
-  },
-  methonds:{
-  
   }
 }
 </script>

@@ -4,6 +4,7 @@ import axios from 'axios'
 const state = {
     users: [],
     userImages: [],
+    fetchError: false,
     userStat: [],
     params: {
         limit: 10
@@ -17,6 +18,7 @@ const state = {
 }
 
 const getters = {
+    fetchError: state => state.fetchError,
     allUsers: state => state.users,
     pages: state => state.pagination.pages,
     limit: state => state.params.limit,
@@ -34,8 +36,14 @@ const getters = {
 const actions = {
     async fetchUsers({ commit }){
         const queryString = Object.keys(state.params).map(key => key + '=' + state.params[key]).join('&');
-        const response = await axios.get('http://localhost:5000/api/v1/users?' + queryString)
-        commit('setUsers', response.data)
+        try {
+            const response = await axios.get('http://localhost:5000/api/v1/users?' + queryString)
+            commit('setUsers', response.data)
+        } catch (err) {
+            commit('failedToFetch')
+        }
+         
+        
     },
     async setImage({ commit }, id){
         const response = await axios.get(`http://localhost:5000/api/v1/${id}/avatar`)
@@ -51,12 +59,12 @@ const actions = {
 }
 
 const mutations = {
+    failedToFetch: state => state.fetchError = true,
     setUsers(state, data){
         state.users = data.users
         state.pagination.total = data.length
         state.pagination.pages = data.chunks
     },
-    setStat: (state, stat) => state.userStat.puth(stat),
     addParam: (state, param) => Object.assign(state.params, param),
     setImage: (state, image) => state.userImages.push(image),
     setStat: (state, stat) => state.userStat.push(stat)
