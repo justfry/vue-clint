@@ -9,7 +9,9 @@ import { mapActions } from 'vuex';
 export default {
     name: "SortBy",
     data(){
-        flag: true
+        return {
+            flag: true
+        }
     },
     methods: {
         ...mapActions(['fetchUsers','addParam']),

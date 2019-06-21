@@ -19,7 +19,6 @@ import SearchUser from './SearchUser.vue'
 import Pagination from './Pagination.vue'
 import UserPic from './UserPic.vue'
 import UserStat from './UserStat.vue'
-import Fail from './404.vue'
 import SortBy from './SortBy'
 
 
@@ -36,7 +35,6 @@ export default {
         Pagination,
         UserPic,
         UserStat,
-        Fail,
         SortBy,
     },
     created: function() {

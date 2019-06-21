@@ -41,7 +41,7 @@ const actions = {
             const response = await axios.get('http://localhost:5000/api/v1/users?' + queryString)
             commit('setUsers', response.data)
         } catch (err) {
-            console.log(err)
+            console.error('fetch error', err)
             commit('failedToFetch', 'fetchError')
         }
          
@@ -51,8 +51,8 @@ const actions = {
         try {
             const response = await axios.get(`http://localhost:5000/api/v1/${id}/avatar`)
             commit('setImage', response.data)
-        } catch {
-            console.log(err)
+        } catch(err) {
+            console.error("setimage", err)
             commit('failedToFetch', 'imageGetError')
         }
        
@@ -64,8 +64,8 @@ const actions = {
         try {
             const response = await axios.get(`http://localhost:5000/api/v1/${id}/stat`)
             commit('setStat', response.data)
-        } catch {
-             console.log(err)
+        } catch(err) {
+             console.error("getting statistic", err)
              commit('failedToFetch', 'statGetError')
         }
     }
