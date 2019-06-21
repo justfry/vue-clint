@@ -4,7 +4,8 @@ import axios from 'axios'
 const state = {
     users: [],
     userImages: [],
-    fetchError: false,
+    errors: {
+    },
     userStat: [],
     params: {
         limit: 10
@@ -18,7 +19,7 @@ const state = {
 }
 
 const getters = {
-    fetchError: state => state.fetchError,
+    errors: state => state.errors,
     allUsers: state => state.users,
     pages: state => state.pagination.pages,
     limit: state => state.params.limit,
@@ -40,26 +41,38 @@ const actions = {
             const response = await axios.get('http://localhost:5000/api/v1/users?' + queryString)
             commit('setUsers', response.data)
         } catch (err) {
-            commit('failedToFetch')
+            console.log(err)
+            commit('failedToFetch', 'fetchError')
         }
          
         
     },
     async setImage({ commit }, id){
-        const response = await axios.get(`http://localhost:5000/api/v1/${id}/avatar`)
-        commit('setImage', response.data)
+        try {
+            const response = await axios.get(`http://localhost:5000/api/v1/${id}/avatar`)
+            commit('setImage', response.data)
+        } catch {
+            console.log(err)
+            commit('failedToFetch', 'imageGetError')
+        }
+       
     },
     async addParam({ commit }, param){
         commit('addParam', param)
     },
     async setStat({ commit }, id){
-        const response = await axios.get(`http://localhost:5000/api/v1/${id}/stat`)
-        commit('setStat', response.data)
+        try {
+            const response = await axios.get(`http://localhost:5000/api/v1/${id}/stat`)
+            commit('setStat', response.data)
+        } catch {
+             console.log(err)
+             commit('failedToFetch', 'statGetError')
+        }
     }
 }
 
 const mutations = {
-    failedToFetch: state => state.fetchError = true,
+    failedToFetch: (state, error) => state.errors.error = true,
     setUsers(state, data){
         state.users = data.users
         state.pagination.total = data.length

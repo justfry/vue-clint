@@ -1,17 +1,14 @@
 <template>
     <div>
         <SearchUser />
-        <div v-if="!fetchError">
+        <div>
             <SortBy />
             <div :key="user.id" v-for="user in allUsers">
-                <UserPic v-bind:id="user.id"/>
-                <UserInfo v-bind:user="user"/>
-                <UserStat v-bind:id="user.id" />
+                <UserPic  v-if="!errors.imageGetError" v-bind:id="user.id"/>
+                <UserInfo v-if="!errors.fetchError" v-bind:user="user"/>
+                <UserStat  v-if="!errors.statGetError" v-bind:id="user.id" />
             </div>
         <Pagination />
-        </div>
-        <div v-else>
-            <Fail />
         </div>
     </div>
 </template>
@@ -32,7 +29,7 @@ export default {
     methods: {
         ...mapActions(['fetchUsers']),
     },
-    computed: mapGetters(['allUsers', 'fetchError']),
+    computed: mapGetters(['allUsers', 'errors']),
     components: {
         UserInfo,
         SearchUser,
